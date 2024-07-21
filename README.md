@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Image Classification Project
 
 This project is an image classification system using TensorFlow and Keras. It includes:
@@ -15,3 +16,6 @@ This project is an image classification system using TensorFlow and Keras. It in
 - `notebooks/data_exploration.ipynb` - Explore and visualize the dataset.
 - `notebooks/model_training.ipynb` - Train the model and tune hyperparameters.
 - `notebooks/results_analysis.ipynb` - Analyze the results and metrics.
+=======
+# image-classification
+>>>>>>> origin/main
