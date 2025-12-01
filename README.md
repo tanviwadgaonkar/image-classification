@@ -1,4 +1,4 @@
-### Image Classification using Convolutional Neural Networks (CNNs)
+# Image Classification using Convolutional Neural Networks (CNNs)
 
 A complete machine learning pipeline for classifying images using a custom CNN model.
 This project covers data preprocessing, model training, evaluation, and utilities for running experiments.
