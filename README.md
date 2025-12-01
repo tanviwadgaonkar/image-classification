@@ -1,31 +1,141 @@
-# Image Classification using CNN
+### Image Classification using Convolutional Neural Networks (CNNs)
 
-A convolutional neural network (CNN) model for image classification with around 95% accuracy.
+A complete machine learning pipeline for classifying images using a custom CNN model.
+This project covers data preprocessing, model training, evaluation, and utilities for running experiments.
 
-## Features
-- Dataset preprocessing and augmentation
-- Custom CNN architecture (TensorFlow / Keras)
-- Training, validation, and testing pipeline
-- Visualization of accuracy and loss
+### Features
 
-## Tech Stack
-- Python
-- TensorFlow / Keras
-- NumPy, Pandas, Matplotlib
+End-to-end image classification workflow
 
-## How to Run
+Data preprocessing with augmentation
+
+Custom CNN model
+
+Training loop with loss/accuracy tracking
+
+Evaluation script
+
+Jupyter notebooks for analysis
+
+Unit tests for all modules
+
+### Tech Stack
+
+Python
+
+NumPy, Pandas
+
+TensorFlow / Keras or pure Python CNN
+
+Matplotlib / Seaborn
+
+scikit-learn
+
+### 📁 Folder Structure
+
+image-classification/
+
+│
+
+├── notebooks/
+
+│   ├── data_exploration.ipynb
+
+│   ├── model_training.ipynb
+
+│   └── results_analysis.ipynb
+
+│
+
+
+├── src/
+
+│   ├── data_preprocessing.py     # Dataset loading + augmentation
+
+│   ├── model.py                  # CNN architecture
+
+│   ├── train.py                  # Training pipeline
+
+
+│   ├── evaluate.py               # Evaluation script
+
+│   └── utils.py                  # Helper functions
+
+
+│
+
+
+├── tests/
+
+
+│   ├── test_data_preprocessing.py
+
+
+│   ├── test_evaluate.py
+
+
+│   ├── test_model.py
+
+
+│   └── test_train.py
+
+
+│
+
+
+├── requirements.txt
+
+├── setup.py
+
+└── README.md
+
+## 🛠️ How to Run
+
+### 1️⃣ Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 2️⃣ Preprocess the Dataset
+```bash
+python src/data_preprocessing.py
+```
+
+### 3️⃣ Train the Model
+```bash
+python src/train.py
+```
+
+### 4️⃣ Evaluate the Model
+```bash
+python src/evaluate.py
+```
+
+### 5️⃣ Explore Results (Optional)
+Use the Jupyter notebooks for:
+
+- Data exploration  
+- Model training visualization  
+- Result analysis  
 
 ```bash
-git clone https://github.com/tanviwadgaonkar/image-classification.git
-cd image-classification
+jupyter notebook notebooks/
+```
+### My Contribution
 
-pip install -r requirements.txt
+Implemented preprocessing + augmentation pipeline
 
-# Example commands
-python train.py
-python evaluate.py
-## My Contribution
-- Implemented the CNN architecture from scratch  
-- Performed dataset preprocessing and augmentation  
-- Tuned hyperparameters to improve model accuracy  
-- Generated training graphs and evaluation metrics
+Designed and trained the CNN architecture
+
+Developed evaluation scripts and metrics
+
+Created training and analysis notebooks
+
+Wrote unit tests for every module
+
+### 📌 Notes
+
+This project is for learning and experimentation.
+Not intended for production deployment.
+
+
