@@ -1,10 +1,14 @@
 """Model, training, evaluation and prediction. Needs TensorFlow (skipped
 where it can't be imported); CI runs these on Linux."""
 import json
+import os
 
 import pytest
 
-tf = pytest.importorskip("tensorflow")
+if os.environ.get("REQUIRE_TF"):  # CI: a missing TensorFlow must fail, not silently skip
+    import tensorflow as tf
+else:
+    tf = pytest.importorskip("tensorflow")
 
 from src.data_preprocessing import load_datasets, load_test_dataset  # noqa: E402
 from src.evaluate import evaluate_model  # noqa: E402
