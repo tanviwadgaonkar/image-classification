@@ -42,7 +42,11 @@ Trained from scratch at 32×32 on the 50,000 training images (40,000 train / 10,
 | ship | 0.926 | 0.894 | 0.910 |
 | truck | 0.878 | 0.916 | 0.897 |
 
-**Reading the results.** Validation (84.95 %) and test (84.72 %) agree closely, and the 3.6-point gap to training accuracy shows only mild overfitting. Cat (F1 0.71) and dog (recall 0.71) are the weakest classes, a common pattern on CIFAR-10. The confusion matrix in the run's `cifar10-model` artifact shows where their errors go. Training used the full 40-epoch budget, and early stopping never triggered (best epoch 35), so a longer run may still gain a little. For context, this is a compact from-scratch CNN; much larger architectures and transfer learning reach well above 90 % on CIFAR-10.
+![CIFAR-10 test-set confusion matrix](docs/cifar10_confusion_matrix.png)
+
+*Test-set confusion matrix (rows: actual, columns: predicted), from the run's `cifar10-model` artifact.*
+
+**Reading the results.** Validation (84.95 %) and test (84.72 %) agree closely, and the 3.6-point gap to training accuracy shows only mild overfitting. Cat (F1 0.71) and dog (recall 0.71) are the weakest classes, and the confusion matrix below shows they mostly fail on each other: the largest single error is **dog predicted as cat (136 of 1,000 dogs)**, then cat predicted as dog (72). The next largest is truck predicted as automobile (51). Training used the full 40-epoch budget, and early stopping never triggered (best epoch 35), so a longer run may still gain a little. For context, this is a compact from-scratch CNN; much larger architectures and transfer learning reach well above 90 % on CIFAR-10.
 
 ## Quick start
 
