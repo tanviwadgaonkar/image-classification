@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/tanviwadgaonkar/image-classification/actions/workflows/ci.yml/badge.svg)](https://github.com/tanviwadgaonkar/image-classification/actions/workflows/ci.yml) [![Train on CIFAR-10](https://github.com/tanviwadgaonkar/image-classification/actions/workflows/train-cifar10.yml/badge.svg)](https://github.com/tanviwadgaonkar/image-classification/actions/workflows/train-cifar10.yml)
 
+**Status:** implemented and tested (13 tests on a synthetic dataset). Trained and evaluated on the real CIFAR-10 test set in CI. Not deployed.
+
 A compact convolutional neural network (TensorFlow / Keras) that trains on any **folder-per-class** image dataset, evaluates on a held-out test set, and classifies single images. Trained and evaluated end to end on **CIFAR-10** in CI.
 
 ```
@@ -47,6 +49,13 @@ Trained from scratch at 32×32 on the 50,000 training images (40,000 train / 10,
 *Test-set confusion matrix (rows: actual, columns: predicted), from the run's `cifar10-model` artifact.*
 
 **Reading the results.** Validation (84.95 %) and test (84.72 %) agree closely, and the 3.6-point gap to training accuracy shows only mild overfitting. Cat (F1 0.71) and dog (recall 0.71) are the weakest classes, and the confusion matrix below shows they mostly fail on each other: the largest single error is **dog predicted as cat (136 of 1,000 dogs)**, then cat predicted as dog (72). The next largest is truck predicted as automobile (51). Training used the full 40-epoch budget, and early stopping never triggered (best epoch 35), so a longer run may still gain a little. For context, this is a compact from-scratch CNN; much larger architectures and transfer learning reach well above 90 % on CIFAR-10.
+
+## Limitations
+
+- **Small, from-scratch CNN.** About 84.7 % on CIFAR-10 is a reasonable baseline, not state of the art. Transfer learning from an ImageNet backbone would be the obvious comparison; it is not done here.
+- **CIFAR-10's test set has near-duplicates of training images** (Barz & Denzler, *Do we train on test data? Purging CIFAR of near-duplicates*, 2020), which inflates every model's test accuracy slightly. These numbers are not corrected for it.
+- **One training run.** The 84.72 % comes from a single seed; run-to-run variance was not measured.
+- **CPU training in CI** (1 h 49 min) limits how far the architecture and schedule can be explored on the free plan.
 
 ## Quick start
 
