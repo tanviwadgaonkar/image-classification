@@ -18,7 +18,31 @@ image.jpg ───────────────────────�
 
 ## Results on CIFAR-10
 
-<!-- RESULTS -->
+Trained from scratch at 32×32 on the 50,000 training images (40,000 train / 10,000 validation split), evaluated once on the official **10,000-image test set**. Numbers come from [workflow run 40379035525](https://github.com/tanviwadgaonkar/image-classification/actions/runs/40379035525) on a GitHub-hosted CPU runner (1 h 49 min); the trained model is attached to that run as the `cifar10-model` artifact.
+
+| Metric | Value |
+|---|---|
+| **Test accuracy** | **84.72 %** |
+| Test macro-F1 | 0.846 |
+| Validation accuracy (best epoch) | 84.95 % |
+| Train accuracy (best epoch, with augmentation) | 88.30 % |
+| Epochs | 40 of 40 (best: 35) |
+| Parameters | < 400k |
+
+| Class | Precision | Recall | F1 |
+|---|---|---|---|
+| airplane | 0.852 | 0.883 | 0.867 |
+| automobile | 0.893 | 0.949 | 0.920 |
+| bird | 0.813 | 0.796 | 0.804 |
+| cat | 0.727 | 0.692 | 0.709 |
+| deer | 0.830 | 0.842 | 0.836 |
+| dog | 0.858 | 0.705 | 0.774 |
+| frog | 0.819 | 0.915 | 0.864 |
+| horse | 0.874 | 0.880 | 0.877 |
+| ship | 0.926 | 0.894 | 0.910 |
+| truck | 0.878 | 0.916 | 0.897 |
+
+**Reading the results.** Validation (84.95 %) and test (84.72 %) agree closely, and the 3.6-point gap to training accuracy shows only mild overfitting. Cat and dog are the weakest classes: their low recall comes largely from confusing them with each other, a known hard pair in CIFAR-10. Training used the full 40-epoch budget, and early stopping never triggered (best epoch 35), so a longer run may still gain a little. For context, this is a compact from-scratch CNN; much larger architectures and transfer learning reach well above 90 % on CIFAR-10.
 
 ## Quick start
 
