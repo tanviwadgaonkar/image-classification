@@ -1,0 +1,7 @@
+data/*
+!data/README.md
+artifacts/
+__pycache__/
+.pytest_cache/
+*.keras
+*.h5

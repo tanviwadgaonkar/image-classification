@@ -1,0 +1,42 @@
+name: Train on CIFAR-10
+
+# Trains and evaluates the CNN on the real CIFAR-10 dataset on a CPU runner.
+# The numbers in the README come from this workflow.
+on:
+  push:
+    paths: ["src/**", "scripts/**", ".github/workflows/train-cifar10.yml"]
+  workflow_dispatch:
+
+# Least privilege: these jobs only read the repository.
+permissions:
+  contents: read
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python scripts/export_cifar10.py --out data/cifar10
+      - run: python -m src.train --data-dir data/cifar10/train --image-size 32 --batch-size 64 --epochs 40 --out artifacts
+      - run: python -m src.evaluate --model-dir artifacts --test-dir data/cifar10/test
+      - name: Publish results
+        run: |
+          python - <<'PY'
+          import json
+          m = json.load(open("artifacts/metrics.json")); h = json.load(open("artifacts/history.json"))
+          best = min(range(len(h["val_loss"])), key=h["val_loss"].__getitem__)
+          lines = [f"test accuracy {m['accuracy']} | macro-F1 {m['f1_macro']} | n_test {m['n_test']}",
+                   f"epochs run {len(h['loss'])}, best epoch {best + 1}, val_accuracy {h['val_accuracy'][best]:.4f}, train_accuracy {h['accuracy'][best]:.4f}"]
+          lines += [f"{c}: P {v['precision']} R {v['recall']} F1 {v['f1-score']}" for c, v in m["per_class"].items()]
+          print("::notice title=CIFAR-10 results::" + "%0A".join(lines))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cifar10-model
+          path: artifacts/
