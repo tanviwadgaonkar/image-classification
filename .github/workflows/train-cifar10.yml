@@ -7,6 +7,10 @@ on:
     paths: ["src/**", "scripts/**", ".github/workflows/train-cifar10.yml"]
   workflow_dispatch:
 
+# Least privilege: these jobs only read the repository.
+permissions:
+  contents: read
+
 jobs:
   train:
     runs-on: ubuntu-latest
